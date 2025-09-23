@@ -30,13 +30,8 @@ jq '. + {
 
 # Install Ruff for jupyter linting in vs code
 
-echo "Installing extension: charliermarsh.ruff
+echo "Installing extension: charliermarsh.ruff"
 
 # Install the extension using code-server
 code-server --install-extension charliermarsh.ruff
-
-# Check if the installation was successful
-if [ $? -eq 0 ]; then
-  echo "Successfully installed charliermarsh.ruff
-else
-  echo "Failed to install charliermarsh.ruff
+echo "Installed ruff"
