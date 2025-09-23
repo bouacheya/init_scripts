@@ -18,11 +18,8 @@ fi
 # We will keep the comments outside the jq block, as jq doesn't support comments inside JSON.
 jq '. + {
     "workbench.colorTheme": "Default Dark Modern",  # Set the theme
-
-    "editor.rulers": [80, 100, 120],  # Add specific vertical rulers
     "files.trimTrailingWhitespace": true,  # Automatically trim trailing whitespace
     "files.insertFinalNewline": true,  # Ensure files end with a newline
-
     "flake8.args": [
         "--max-line-length=100"  # Max line length for Python linting
     ]
