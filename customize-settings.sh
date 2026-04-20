@@ -32,3 +32,5 @@ echo "Installing extension: charliermarsh.ruff"
 # Install the extension using code-server
 code-server --install-extension charliermarsh.ruff
 echo "Installed ruff"
+code-server --install-extension anthropic.claude-code
+echo "Installed claude code"
