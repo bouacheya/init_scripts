@@ -17,7 +17,7 @@ fi
 # Add or modify Python-related settings using jq
 # We will keep the comments outside the jq block, as jq doesn't support comments inside JSON.
 jq '. + {
-    "workbench.colorTheme": "Default Dark Modern",  # Set the theme
+    "workbench.colorTheme": "Dark 2026",  # Set the theme
     "files.trimTrailingWhitespace": true,  # Automatically trim trailing whitespace
     "files.insertFinalNewline": true,  # Ensure files end with a newline
     "flake8.args": [
