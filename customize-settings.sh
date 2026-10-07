@@ -1,8 +1,30 @@
 #!/bin/bash
 
 # This init script updates settings of VSCode. Many example of options are displayed.
-# See here for the default settings enforced in Onyxia's VSCode-based images : https://github.com/InseeFrLab/images-datascience/blob/main/vscode/settings/User.json 
+# See here for the default settings enforced in Onyxia's VSCode-based images : https://github.com/InseeFrLab/images-datascience/blob/main/vscode/settings/User.json
 # Expected parameters : None
+
+# Keep Claude Code data (conversations, memory, settings, login) on the persistent volume.
+# Only ${HOME}/work survives a service restart: ~/.claude and ~/.claude.json are linked into it.
+CLAUDE_PERSIST_DIR="${HOME}/work/.claude-config"
+mkdir -p "$CLAUDE_PERSIST_DIR"
+for name in claude claude.json; do
+    target="${HOME}/.${name}"
+    stored="${CLAUDE_PERSIST_DIR}/${name}"
+    [ -L "$target" ] && continue
+    # First run: keep whatever already exists in the home directory
+    if [ -e "$target" ] && [ ! -e "$stored" ]; then
+        mv "$target" "$stored"
+    fi
+    rm -rf "$target"
+    if [ "$name" = "claude" ]; then
+        mkdir -p "$stored"
+    elif [ ! -e "$stored" ]; then
+        echo "{}" > "$stored"
+    fi
+    ln -s "$stored" "$target"
+done
+echo "Claude Code data linked to ${CLAUDE_PERSIST_DIR}"
 
 # Path to the VSCode settings.json file
 SETTINGS_FILE="${HOME}/.local/share/code-server/User/settings.json"
